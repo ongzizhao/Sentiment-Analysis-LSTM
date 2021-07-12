@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron text-center">
+  <h3>Welcome to Assignment 8</h3>
+  <p class="lead">Team 1 - Ian, Zi Zhao, Joseph </p>
+ <div style="text-align:center">  
+
+<form id ='form' action="/" method="POST">
+  <div class="form-group">
+
+    <h4 style="color: black">Copy the review into the textbox below and click green button</h4>
+
+    <textarea class="form-control transparent-input rounded-0 border border-success" rows="11" id="comment" name="text"></textarea>
+  </div>
+  <button type="submit" class="btn btn-lg btn-success" value="index">WhatYouMean</button>
+</form>
+
+
+  {% if (sentiment == 'unhappy') and (load == 'true') %} 
+  <p></p>
+  <table width="200" cellspacing="0" cellpadding="0" style="margin-left:auto;margin-right:auto"">
+      <thead>
+        <th width="150" style="margin-left:auto;margin-right:auto">Your text</th>
+        <th width="50" style="margin-left:auto;margin-right:auto">Sentiment</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td> {{ data }} </td>
+          <td> <img src="{{url_for('static', filename='sad.jpg') }}" width="100" height="100" /> </td>
+        </tr>
+      </tbody>
+    </table>
+
+ 
+  {% elif (sentiment == 'satisfied') and (load == 'true') %} 
+  <p></p>
+  <table width="200" cellspacing="0" cellpadding="0" style="margin-left:auto;margin-right:auto"">
+      <thead>
+        <th width="150" style="margin-left:auto;margin-right:auto">Your text</th>
+        <th width="50" style="margin-left:auto;margin-right:auto">Sentiment</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td> {{ data }} </td>
+          <td> <img src="{{url_for('static', filename='notsure.png') }}" width="100" height="100" /> </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  {% elif (sentiment == 'impressed') and (load=='true') %} 
+  <p></p>
+  <table width="200" cellspacing="0" cellpadding="0" style="margin-left:auto;margin-right:auto"">
+      <thead>
+        <th width="150" style="margin-left:auto;margin-right:auto">Your text</th>
+        <th width="50" style="margin-left:auto;margin-right:auto">Sentiment</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td width="200"> {{ data }} </td>
+          <td > <img src="{{url_for('static', filename='happy.jpg') }}" width="100" height="100" /> </td>
+        </tr>
+      </tbody>
+    </table>
+ 
+  {% elif prediction == 'not_en' %}
+  <h4>Please enter your text in English only </h4> 
+  
+  {% elif prediction|float == 0 %}
+  <h4>Please enter your text in the above textbox </h4> 
+
+  <!-- <h4>the sentiment/WhatYouMean is a good {{ prediction }}% </h4> -->
+  {% endif %}
+  <hr>
+  </div>
+
+</div>        
+{% endblock %}
